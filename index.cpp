@@ -129,9 +129,7 @@ bool isValidPawnMove(int fromRow, int fromCol, int toRow, int toCol, bool white)
 
 	// 3. Capturing diagonally
 	if ((toCol == fromCol + 1 || toCol == fromCol - 1) && (toRow == fromRow + direction)) {
-		if (grid[toRow][toCol] != '.' && std::isupper(grid[toRow][toCol]) != white) {
-			return true;
-		}
+			return true;	
 	}
 
 	return false;
@@ -143,10 +141,7 @@ bool isValidKingMove(int fromRow, int fromCol, int toRow, int toCol, bool white)
 
 	// King moves only one square in any direction
 	if (rowDiff <= 1 && colDiff <= 1) {
-		// Can't capture own piece:
-		if (grid[toRow][toCol] == '.' || std::isupper(grid[toRow][toCol]) != white) {
 			return true; 
-		}
 	}
 	return false;
 }
@@ -157,11 +152,10 @@ bool isValidKnightMove(int fromRow, int fromCol, int toRow, int toCol, bool whit
 
 	// knight moves in L shape: 2 by 1 or 1 by 2
 	if ((rowDiff == 2 && colDiff == 1) || (rowDiff == 1 && colDiff == 2)) {
-		// Can't capture own piece:
-		if (grid[toRow][toCol] == '.' || std::isupper(grid[toRow][toCol]) != white) {
 			return true;
-		}
+		
 	}
+
 	return false;
 }
 
@@ -179,7 +173,7 @@ bool isPathClear(int fromRow, int fromCol, int toRow, int toCol) {
 	int currentRow = fromRow + rowStep; 
 	int currentCol = fromCol + colStep;
 
-	while (currentRow != toRow || currentCol != toCol) { // while piece place != choosen place keep checking if theres another pice based on direction
+	while (currentRow != toRow || currentCol != toCol) { 
 		if (grid[currentRow][currentCol] != '.') {
 			return false;
 		}
@@ -197,9 +191,6 @@ bool isValidRookMove(int fromRow, int fromCol, int toRow, int toCol, bool white)
 	// Check if path is clear
 	if (!isPathClear(fromRow, fromCol, toRow, toCol)) return false;
 
-	// Can't capture own piece
-	if (grid[toRow][toCol] != '.' && std::isupper(grid[toRow][toCol]) == white) return false;
-
 	return true;
 }
 
@@ -210,9 +201,6 @@ bool isValidBishopMove(int fromRow, int fromCol, int toRow, int toCol, bool whit
 
 	// Check if path is clear
 	if (!isPathClear(fromRow, fromCol, toRow, toCol)) return false;
-
-	// Can't capture own piece
-	if (grid[toRow][toCol] != '.' && std::isupper(grid[toRow][toCol]) == white) return false;
 
 	return true;
 }
@@ -304,3 +292,4 @@ int main() {
 	std::cout << "Thanks for playing!\n";
 	return 0;
 }
+
